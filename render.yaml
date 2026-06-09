@@ -91,4 +91,4 @@ projects:
               - key: NGROK_AUTHTOKEN
                 sync: false
               - key: NGROK_TCP_URL
-                sync: false
+                value: tcp://7.tcp.ngrok.io:25575
