@@ -17,3 +17,33 @@ projects:
             ipAllowList:
               - source: 0.0.0.0/0
                 description: temporary-test-access-pending-bemi-ardent-egress-ips
+
+        services:
+          - type: pserv
+            name: alliance-postgres-18
+            runtime: docker
+            region: ohio
+            plan: starter
+            dockerfilePath: ./Dockerfile
+            dockerContext: .
+            envVars:
+              - key: POSTGRES_DB
+                value: alliance_test
+              - key: POSTGRES_USER
+                value: alliance_test_user
+              - key: POSTGRES_PASSWORD
+                generateValue: true
+              - key: BEMI_REPLICATION_PASSWORD
+                generateValue: true
+              - key: ARDENT_REPLICATION_PASSWORD
+                generateValue: true
+              - key: PGDATA
+                value: /data/postgres
+              - key: POSTGRES_INITDB_ARGS
+                value: "--auth-host=scram-sha-256"
+              - key: POSTGRES_SSL_COMMON_NAME
+                value: alliance-postgres-18
+            disk:
+              name: alliance-postgres-18-data
+              mountPath: /data
+              sizeGB: 10

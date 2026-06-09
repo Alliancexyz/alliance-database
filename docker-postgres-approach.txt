@@ -1,0 +1,11 @@
+Self-managed PostgreSQL 18 on Render is viable for in-Render Bemi access over the private network.
+
+Use the container image/build that includes wal2json. The self-managed superuser can create the replication roles, publications, and logical slots Ardent needs.
+
+Internal Render connection target: `alliance-postgres-18:10000` with database `alliance_test`.
+
+Keep the existing Render Managed Postgres config as the fallback path.
+
+Render public web services expose HTTP(S), not raw public PostgreSQL TCP. Render private services can carry raw PostgreSQL TCP internally only, so Ardent's direct external connector remains blocked unless a separate TCP/TLS ingress or tunnel outside Render is provided.
+
+No secrets belong in this file.
