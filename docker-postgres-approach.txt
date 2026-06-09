@@ -9,3 +9,5 @@ Keep the existing Render Managed Postgres config as the fallback path.
 Render public web services expose HTTP(S), not raw public PostgreSQL TCP. Render private services can carry raw PostgreSQL TCP internally only, so Ardent's direct external connector remains blocked unless a separate TCP/TLS ingress or tunnel outside Render is provided.
 
 No secrets belong in this file.
+
+Bemi runs over Render's private network to `alliance-postgres-18:10000`; set `DB_PASSWORD` to the Bemi replication role password and `DESTINATION_DB_PASSWORD` to the app writer password in Render env vars during deployment.

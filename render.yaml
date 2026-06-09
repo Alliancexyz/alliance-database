@@ -47,3 +47,33 @@ projects:
               name: alliance-postgres-18-data
               mountPath: /data
               sizeGB: 10
+
+          - type: worker
+            name: alliance-bemi-worker
+            runtime: image
+            image:
+              url: public.ecr.aws/bemi/dev:latest
+            region: ohio
+            plan: starter
+            dockerCommand: ""
+            envVars:
+              - key: DB_HOST
+                value: alliance-postgres-18
+              - key: DB_PORT
+                value: "10000"
+              - key: DB_NAME
+                value: alliance_test
+              - key: DB_USER
+                value: bemi_replication
+              - key: DB_PASSWORD
+                sync: false
+              - key: DESTINATION_DB_HOST
+                value: alliance-postgres-18
+              - key: DESTINATION_DB_PORT
+                value: "10000"
+              - key: DESTINATION_DB_NAME
+                value: alliance_test
+              - key: DESTINATION_DB_USER
+                value: alliance_test_user
+              - key: DESTINATION_DB_PASSWORD
+                sync: false
