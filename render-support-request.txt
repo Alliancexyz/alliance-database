@@ -1,0 +1,44 @@
+Subject: Enable logical replication for Bemi and Ardent on alliance-test Postgres
+
+Hi Render Support,
+
+Please enable and confirm logical replication support for our Render Managed Postgres service:
+
+Service ID: dpg-d8jgjus8aovs739bmrjg-a
+Service name: alliance-test
+Database: alliance_test
+Primary connection role: alliance_test_user
+Ardent connection role: ardent_replication
+Schema: public
+
+
+Current self-service setup already completed:
+
+- Plan upgraded to basic_256mb with 15 GB disk.
+- External IP allow list is temporarily open for test access until Bemi and Ardent egress CIDRs are known.
+- Role ardent_replication exists and has CONNECT/CREATE plus public schema USAGE/SELECT/default SELECT grants, but it does not have a password, REPLICATION, or SUPERUSER-equivalent managed permissions.
+- Render CLI parameter overrides were rejected for this account with: "parameter overrides are not available for this account".
+
+We need this database prepared for Bemi and Ardent.
+
+Please configure/confirm the following Postgres settings:
+
+- wal_level=logical
+- max_wal_senders >= 10
+- max_replication_slots >= 10
+
+For Bemi:
+
+- Grant the required REPLICATION permission or managed equivalent for the Bemi connection role using alliance_test_user.
+- Create or confirm the required Bemi publication for tracked tables in schema public.
+- Confirm any required publication ownership/permissions for Bemi to read changes from alliance_test.public.
+
+For Ardent:
+
+- Confirm whether wal2json is available/enabled on this Render Managed Postgres instance.
+- Enable wal2json if it is not already available.
+- Grant the required SUPERUSER/REPLICATION managed permissions or equivalent for role ardent_replication so Ardent can use logical decoding with wal2json.
+
+We understand Render Managed Postgres logical replication is support-enabled and that SUPERUSER/REPLICATION privileges and wal2json availability are not self-service. Please make the required support-side changes and confirm when complete.
+
+No passwords are included in this request.

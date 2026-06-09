@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://render.com/schema/render.yaml.json
+version: "1"
+
+projects:
+  - name: Alliance Second Test Environment
+    environments:
+      - name: Production
+        databases:
+          - name: alliance-test
+            databaseName: alliance_test
+            user: alliance_test_user
+            region: ohio
+            postgresMajorVersion: "18"
+            plan: basic-256mb
+            diskSizeGB: 15
+            storageAutoscalingEnabled: false
+            ipAllowList:
+              - source: 0.0.0.0/0
+                description: temporary-test-access-pending-bemi-ardent-egress-ips
