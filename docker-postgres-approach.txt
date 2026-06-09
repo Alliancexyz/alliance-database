@@ -6,9 +6,9 @@ Internal Render connection target: `alliance-postgres-18:10000` with database `a
 
 Keep the existing Render Managed Postgres config as the fallback path.
 
-Render public web services expose HTTP(S), not raw public PostgreSQL TCP. Render private services can carry raw PostgreSQL TCP internally only, so Ardent's direct external connector requires the ngrok tunnel worker and cannot be deployed until a paid ngrok reserved TCP address and agent authtoken are available.
+Render public web services expose HTTP(S), not raw public PostgreSQL TCP. Render private services can carry raw PostgreSQL TCP internally only, so Ardent's direct external connector uses the `alliance-ardent-ngrok-tunnel` worker.
 
-ngrok TCP endpoints require ngrok account card verification before the agent can start TCP tunnels (`ERR_NGROK_8013`).
+Ardent ngrok TCP endpoint: `7.tcp.ngrok.io:25575` forwards to `alliance-postgres-18:10000`.
 
 No secrets belong in this file.
 
