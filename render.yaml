@@ -77,3 +77,18 @@ projects:
                 value: alliance_test_user
               - key: DESTINATION_DB_PASSWORD
                 sync: false
+
+          - type: worker
+            name: alliance-ardent-ngrok-tunnel
+            runtime: docker
+            region: ohio
+            plan: starter
+            dockerfilePath: ./Dockerfile.ngrok
+            dockerContext: .
+            envVars:
+              - key: NGROK_UPSTREAM
+                value: alliance-postgres-18:10000
+              - key: NGROK_AUTHTOKEN
+                sync: false
+              - key: NGROK_TCP_URL
+                sync: false

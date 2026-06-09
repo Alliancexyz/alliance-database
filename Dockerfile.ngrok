@@ -1,0 +1,7 @@
+FROM ngrok/ngrok:latest
+
+COPY docker/ngrok/start-ngrok-tcp.sh /usr/local/bin/start-ngrok-tcp.sh
+
+RUN chmod +x /usr/local/bin/start-ngrok-tcp.sh
+
+ENTRYPOINT ["/usr/local/bin/start-ngrok-tcp.sh"]
