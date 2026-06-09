@@ -8,6 +8,8 @@ Keep the existing Render Managed Postgres config as the fallback path.
 
 Render public web services expose HTTP(S), not raw public PostgreSQL TCP. Render private services can carry raw PostgreSQL TCP internally only, so Ardent's direct external connector requires the ngrok tunnel worker and cannot be deployed until a paid ngrok reserved TCP address and agent authtoken are available.
 
+ngrok TCP endpoints require ngrok account card verification before the agent can start TCP tunnels (`ERR_NGROK_8013`).
+
 No secrets belong in this file.
 
 Bemi runs over Render's private network to `alliance-postgres-18:10000`; set `DB_PASSWORD` to the Bemi replication role password and `DESTINATION_DB_PASSWORD` to the app writer password in Render env vars during deployment.
